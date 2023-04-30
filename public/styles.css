@@ -1,0 +1,47 @@
+*{
+  box-sizing: border-box;
+}
+
+html{
+  font-family:'Sedgwick Ave', cursive;;
+}
+
+body {
+  background: url(/2016-03-Sylvester_01.jpeg);
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.butts{
+  text-align: center;
+}
+
+form {
+  text-align: center;
+}
+
+h1{
+  text-align: center;
+}
+
+h2{
+  text-align: center;
+}
+
+#toDoList{
+  height: 500px;
+  width: 40%;
+  background-color: rgb(208, 205, 200);
+  text-align: center;
+  margin-left: 30%;
+  margin-top: 10px;
+}
+
+#toDoList li{
+  list-style: none;
+  padding-top: 10px;
+}
+
+.done{
+  text-decoration: line-through;
+}
