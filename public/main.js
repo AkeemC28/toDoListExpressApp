@@ -1,13 +1,12 @@
 const serverURL = 'http://localhost:2830'; 
-
-var trash = document.getElementsByClassName("fa-trash");
 var submitButton = document.getElementById('submit');
 var toDoInput = document.getElementById('toDoInput');
 var toDoList = document.getElementById('toDoList');
 var form = document.getElementById('#newtask');
-var clearButton = document.getElementById('clear');
+var clearButton = document.querySelector('#clear');
 var clearCompletedTask = document.getElementById('cct');
 var leftOver = document.getElementById('leftOver');
+
 
 submitButton.addEventListener('click', function (e) {
     e.preventDefault();
@@ -25,9 +24,9 @@ submitButton.addEventListener('click', function (e) {
         })
         
     }) 
-        .then(response => {
-            if (response.ok) return response.json();
-        })
+        // .then(response => {
+        //     if (response.ok) return response.json();
+        // })
         .then(data => {
             console.log(data);
             // window.location.reload(true);
@@ -59,22 +58,84 @@ function tasksUp(){
       leftOver.innerText = (everyTask - clearCompletedTask)
 }
 
-function clearCompleted(){
-  console.log('clearCompleted')
-  let done = document.getElementsByClassName('done')
-  for(let i = 0; i < done.length; i++){
-      done[i].style.display = 'none'
+function clearCompleted() {
+  let done = document.getElementsByClassName('done');
+  let completedTasks = [];
+  for (let i = 0; i < done.length; i++) {
+    completedTasks.push(done[i].innerText);
+    done[i].style.textDecoration = 'line-through';
+    done[i].classList.add('done');
   }
-  tasksUp()
+  toggleTaskStatus(completedTasks);
 }
-function clear(){
-  document.getElementById("toDoList").innerText = ("");
-  tasksUp();
+
+
+
+function toggleTaskStatus(tasks) {
+  fetch(`${serverURL}/tasks`, {
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      tasks: tasks,
+      completed: true
+    }),
+  })
+    .then((response) => {
+      // Handle the response if needed
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }
+
+
+function clear(){ 
+  let toDoTask = document.querySelectorAll('li')
+  for(let i = 0; i < toDoTask.length; i++){
+    sendDelete(toDoTask[i].innerText);
+  // tasksUp();
+}
+}
+
+
+function sendDelete(tasks){
+  console.log(tasks)
+  fetch('/tasks', {
+    method: 'delete',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      tasks: tasks
+    })
+  }).then(function (response) {
+    // window.location.reload()
+  })
+  
+}
+
+
+// Array.from(clearButton).forEach(function(element) {
+//     const task = this.parentNode.parentNode.childNodes[1].innerText;
+//     element.addEventListener('click', function(){
+//       fetch('/tasks', {
+//         method: 'delete',
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//           task: task
+//         })
+//       }).then(function (response) {
+//         window.location.reload()
+//       })
+//     });
+// });
 
 
 
 clearButton.addEventListener('click', clear)
+
 clearCompletedTask.addEventListener('click', clearCompleted)
 
 
@@ -160,21 +221,4 @@ clearCompletedTask.addEventListener('click', clearCompleted)
 //   });
 // });
 
-// Array.from(trash).forEach(function(element) {
-//       element.addEventListener('click', function(){
-//         const name = this.parentNode.parentNode.childNodes[1].innerText
-//         const msg = this.parentNode.parentNode.childNodes[3].innerText
-//         fetch('messages', {
-//           method: 'delete',
-//           headers: {
-//             'Content-Type': 'application/json'
-//           },
-//           body: JSON.stringify({
-//             'name': name,
-//             'msg': msg
-//           })
-//         }).then(function (response) {
-//           window.location.reload()
-//         })
-//       });
-// });
+

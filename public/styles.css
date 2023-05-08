@@ -3,7 +3,8 @@
 }
 
 html{
-  font-family:'Sedgwick Ave', cursive;;
+  font-family:'Sedgwick Ave', cursive;
+  color: rgb(248, 127, 143);
 }
 
 body {
@@ -22,10 +23,16 @@ form {
 
 h1{
   text-align: center;
+  font-family:'Sedgwick Ave', cursive;
+  color: rgb(248, 127, 143);
+  text-shadow: 3px 3px rgb(232, 228, 211);
+  font-size: 3rem;
 }
 
 h2{
   text-align: center;
+  text-shadow: 1px 2px rgb(232, 228, 211);
+  font-size: 1.8rem;
 }
 
 #toDoList{
@@ -40,8 +47,25 @@ h2{
 #toDoList li{
   list-style: none;
   padding-top: 10px;
+  font-family:'Sedgwick Ave', cursive;
 }
 
 .done{
   text-decoration: line-through;
+}
+button{
+  background-color: rgb(248, 127, 143);
+  font-family:'Sedgwick Ave', cursive;
+  border-radius: 6px;
+  padding: 4px;
+  color: rgb(232, 228, 211);
+  width: 10%;
+  border: 3px solid rgb(248, 127, 143);
+  padding: 4px;
+}
+input{
+  border-radius: 6px;
+  padding: 4px;
+  color: rgb(248, 127, 143);
+  border: 3px solid rgb(240, 127, 143);
 }

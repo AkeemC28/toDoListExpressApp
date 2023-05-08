@@ -70,9 +70,11 @@ app.put('/tasks', (req, res) => {
 // })
 
 app.delete('/tasks', (req, res) => {
-  db.collection('tasks').findOneAndDelete({ task: req.body.task }, (err, result) => {
+  console.log(req.body.tasks)
+  db.collection('task').deleteOne({ task: req.body.tasks }, (err, result) => {
     if (err) return res.send(500, err)
-    res.send('Message deleted!')
+    res.redirect('/')
   })
 })
+
 
